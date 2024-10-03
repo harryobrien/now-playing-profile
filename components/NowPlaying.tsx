@@ -62,6 +62,7 @@ export const Player: React.FC<Props> = ({
               overflow: hidden;
               padding: 2px;
               z-index: 0;
+              box-shadow: 1px 1px .5px rgba(0, 0, 0, .5);
             }
 
             #progress {
@@ -98,7 +99,7 @@ export const Player: React.FC<Props> = ({
             #cover {
               animation-name: cover-appear;
               animation-delay: 300ms;
-              box-shadow: 0 1px 3px rgba(0,0,0,0.1), 0 3px 10px rgba(0,0,0,0.05);
+              box-shadow: 1px 1px .5px rgba(0, 0, 0, .5);
               image-rendering: pixelated;
               -webkit-filter: grayscale(100%); /* Safari 6.0 - 9.0 */
               filter: grayscale(100%);
@@ -140,7 +141,7 @@ export const Player: React.FC<Props> = ({
             }
 
             a {
-              color: #00000
+              color: #000000
             }
         `}
       </style>
