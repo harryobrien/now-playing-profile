@@ -138,6 +138,10 @@ export const Player: React.FC<Props> = ({
                 transform: scaleX(1)
               }
             }
+
+            a {
+              color: #00000
+            }
         `}
       </style>
       <div
