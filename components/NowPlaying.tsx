@@ -33,6 +33,8 @@ export const Player: React.FC<Props> = ({
               font-family: Ari, monospace;
               text-shadow: 1px 1px .5px rgba(0, 0, 0, .5);
               z-index: 1;
+              overflow: hidden;
+              text-overflow: ellipsis;
             }
 
             .paused { 
