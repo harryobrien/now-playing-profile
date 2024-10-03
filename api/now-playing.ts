@@ -26,7 +26,7 @@ export default async function (req: NowRequest, res: NowResponse) {
   res.setHeader("Content-Type", "image/svg+xml");
   res.setHeader("Cache-Control", "s-maxage=1, stale-while-revalidate");
 
-  const { duration_ms: duration, name: track } = item;
+  const { duration_ms: duration, name: track, id } = item;
   const { images = [] } = item.album || {};
 
   const cover = images[images.length - 1]?.url;
@@ -38,7 +38,7 @@ export default async function (req: NowRequest, res: NowResponse) {
 
   const artist = (item.artists || []).map(({ name }) => name).join(", ");
   const text = renderToString(
-    Player({ cover: coverImg, artist, track, isPlaying, progress, duration })
+    Player({ cover: coverImg, artist, track, isPlaying, progress, duration, id })
   );
   return res.status(200).send(text);
 }

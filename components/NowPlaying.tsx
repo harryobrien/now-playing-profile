@@ -9,6 +9,7 @@ export interface Props {
   progress: number;
   duration: number;
   isPlaying: boolean;
+  id: string;
 }
 
 export const Player: React.FC<Props> = ({
@@ -18,14 +19,25 @@ export const Player: React.FC<Props> = ({
   progress,
   duration,
   isPlaying,
+  id,
 }) => {
   return (
     <ReadmeImg width="256" height="64">
       <style>
         {`
+            .container {
+              background-size: 5px 5px;
+              background-image: linear-gradient(to right, #6B7D58 0.5px, transparent 0.5px), linear-gradient(to bottom, #6B7D58 0.5px, transparent 0.5px);
+              background-color: #859B6D;
+
+              font-family: Ari, monospace;
+              text-shadow: 1px 1px .5px rgba(0, 0, 0, .5);
+              z-index: 1;
+            }
+
             .paused { 
               animation-play-state: paused !important;
-              background: #e1e4e8 !important;
+              background: #49563b !important;
             }
 
             img:not([src]) {
@@ -45,7 +57,7 @@ export const Player: React.FC<Props> = ({
               width: 100%;
               height: 4px;
               margin: -1px;
-              border: 1px solid #e1e4e8;
+              border: 1px solid #49563b;
               border-radius: 4px;
               overflow: hidden;
               padding: 2px;
@@ -59,7 +71,7 @@ export const Player: React.FC<Props> = ({
               width: 100%;
               height: 6px;
               transform-origin: left center;
-              background-color: #24292e;
+              background-color: black;
               animation: progress ${duration}ms linear;
               animation-delay: -${progress}ms;
             }
@@ -87,6 +99,9 @@ export const Player: React.FC<Props> = ({
               animation-name: cover-appear;
               animation-delay: 300ms;
               box-shadow: 0 1px 3px rgba(0,0,0,0.1), 0 3px 10px rgba(0,0,0,0.05);
+              image-rendering: pixelated;
+              -webkit-filter: grayscale(100%); /* Safari 6.0 - 9.0 */
+              filter: grayscale(100%);
             }
 
             #cover:not([src]) {
@@ -126,12 +141,14 @@ export const Player: React.FC<Props> = ({
         `}
       </style>
       <div
-        className={isPlaying ? "disabled" : ""}
+        className={isPlaying ? "disabled container" : "container"}
         style={{
           display: "flex",
           alignItems: "center",
           paddingTop: 8,
+          paddingBottom: 8,
           paddingLeft: 4,
+          paddingRight: 4,
         }}
       >
         <img id="cover" src={cover ?? null} width="48" height="48" />
@@ -144,9 +161,13 @@ export const Player: React.FC<Props> = ({
             marginLeft: 8,
           }}
         >
-          <Text id="track" weight="bold">
-            {`${track ?? ""} `.trim()}
-          </Text>
+          {track && (
+            <a href={track ? `https://open.spotify.com/track/${id}` : ""}>
+              <Text id="track" weight="bold">
+                {`${track ?? ""} `.trim()}
+              </Text>
+            </a>
+          )}
           <Text id="artist" color={!track ? "gray" : undefined}>
             {artist || "Nothing playing..."}
           </Text>
